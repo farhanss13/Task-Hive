@@ -1,16 +1,15 @@
-import React from "react";
-import Header from "../others/Header";
-import CreateTask from "../others/CreateTask";
-import AllTask from "../others/AllTask";
+import Header from "../others/Header"
+import CreateTask from "../others/CreateTask"
+import AllTask from "../others/AllTask"
 
 const AdminDashboard = () => {
   return (
-    <div className="h-screen w-full bg-[#1c1c1c3f] p-10 text-white">
+    <section className="min-h-screen w-full bg-slate-100 dark:bg-slate-950 p-4 sm:p-8 transition-colors duration-300">
       <Header />
-      <CreateTask/>
-      <AllTask/>
-    </div>
-  );
-};
+      <CreateTask />
+      <AllTask />
+    </section>
+  )
+}
 
-export default AdminDashboard;
+export default AdminDashboard

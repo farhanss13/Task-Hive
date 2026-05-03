@@ -1,241 +1,59 @@
-localStorage.clear()
-
-const employees = [
-  {
-    id: 101,
-    firstName: "Ali",
-    email: "ali@example.com",
-    password: "ali123",
-    taskCounts: {
-      active: 2,
-      newTask: 3,
-      completed: 0,
-      failed: 0
-    },
-    tasks: [
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare Presentation",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare Reporting",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      },
-      {
-        active: false,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Meet Me In Conference Room",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      }
-    ]
-  },
-  {
-    id: 102,
-    firstName: "Ahmed",
-    email: "ahmed@example.com",
-    password: "ahmed123",
-    taskCounts: {
-      active: 3,
-      newTask: 2,
-      completed: 1,
-      failed: 0
-    },
-    tasks: [
-      {
-        active: true,
-        newTask: false,
-        completed: true,
-        failed: false,
-        taskTitle: "Fix Bugs",
-        taskDescription: "Resolve dashboard issues",
-        taskDate: "2026-03-28",
-        category: "Development"
-      },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare Tasks",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare gghh",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      }
-    ]
-  },
-  {
-    id: 103,
-    firstName: "Sara",
-    email: "sara@example.com",
-    password: "sara123",
-    taskCounts: {
-      active: 2,
-      newTask: 2,
-      completed: 0,
-      failed: 1
-    },
-    tasks: [
-      {
-        active: false,
-        newTask: false,
-        completed: false,
-        failed: true,
-        taskTitle: "Write Report",
-        taskDescription: "Monthly performance report",
-        taskDate: "2026-03-25",
-        category: "Reporting"
-      },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare Presentation",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare Presentation",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      }
-    ]
-  },
-  {
-    id: 104,
-    firstName: "Zain",
-    email: "zain@example.com",
-    password: "zain123",
-    taskCounts: {
-      active: 3,
-      newTask: 3,
-      completed: 0,
-      failed: 0
-    },
-    tasks: [
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Design UI",
-        taskDescription: "Create wireframes for app",
-        taskDate: "2026-04-05",
-        category: "Design"
-      },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare Presentation",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare Presentation",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      }
-    ]
-  },
-  {
-    id: 105,
-    firstName: "Fatima",
-    email: "fatima@example.com",
-    password: "fatima123",
-    taskCounts: {
-      active: 2,
-      newTask: 2,
-      completed: 1,
-      failed: 0
-    },
-    tasks: [
-      {
-        active: false,
-        newTask: false,
-        completed: true,
-        failed: false,
-        taskTitle: "Client Meeting",
-        taskDescription: "Discuss project requirements",
-        taskDate: "2026-03-30",
-        category: "Meeting"
-      },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare Presentation",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      },
-      {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
-        taskTitle: "Prepare Presentation",
-        taskDescription: "Create slides for client meeting",
-        taskDate: "2026-04-02",
-        category: "Presentation"
-      }
-    ]
-  }
-]
-const admin = [
-     {
-    "id": 1,
-    "email": "admin@example.com",
-    "password": "admin123"
-  }
-]
-export const setLocalStorage=()=>{
-    localStorage.setItem("employees",JSON.stringify(employees))
-    localStorage.setItem("admin",JSON.stringify(admin))
+const STORAGE_KEYS = {
+  APP_DATA: "taskHiveData",
+  SESSION: "taskHiveSession",
+  THEME: "taskHiveTheme",
 }
-export const getLocalStorage=()=>{
-    const employees = JSON.parse(localStorage.getItem("employees"))
-    const admin = JSON.parse(localStorage.getItem("admin"))
-    return{employees,admin}
 
+const defaultAppData = {
+  admin: {
+    email: "admin@example.com",
+    password: "admin123",
+    name: "Admin",
+    phone: "",
+    image: "",
+  },
+  employees: [],
+}
+
+export const initializeLocalStorage = () => {
+  const existing = localStorage.getItem(STORAGE_KEYS.APP_DATA)
+  if (!existing) {
+    localStorage.setItem(STORAGE_KEYS.APP_DATA, JSON.stringify(defaultAppData))
+  }
+}
+
+export const getAppData = () => {
+  try {
+    const data = localStorage.getItem(STORAGE_KEYS.APP_DATA)
+    return data ? JSON.parse(data) : defaultAppData
+  } catch {
+    return defaultAppData
+  }
+}
+
+export const saveAppData = (data) => {
+  localStorage.setItem(STORAGE_KEYS.APP_DATA, JSON.stringify(data))
+}
+
+export const getSession = () => {
+  try {
+    const session = localStorage.getItem(STORAGE_KEYS.SESSION)
+    return session ? JSON.parse(session) : null
+  } catch {
+    return null
+  }
+}
+
+export const saveSession = (session) => {
+  localStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(session))
+}
+
+export const clearSession = () => {
+  localStorage.removeItem(STORAGE_KEYS.SESSION)
+}
+
+export const getTheme = () => localStorage.getItem(STORAGE_KEYS.THEME) || "dark"
+
+export const saveTheme = (theme) => {
+  localStorage.setItem(STORAGE_KEYS.THEME, theme)
 }

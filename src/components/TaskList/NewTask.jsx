@@ -1,17 +1,28 @@
+import { useContext } from "react"
+import { AuthContext } from "../../context/authContext"
 
-const NewTask = () => {
+const NewTask = ({ task }) => {
+  const { updateTaskStatus } = useContext(AuthContext)
+
   return (
-    <div className=' shrink-0 bg-blue-400 h-full w-75 rounded-xl p-5'>
-          <div className='flex justify-between items-center '>
-          <h3 className='bg-red-400 text-sm px-3 py-1 rounded'>High</h3>
-          <h4 className='text-sm'>20 feb 2026</h4></div>
-          <h1 className='text-2xl font-semibold mt-2'>Make a youtube video</h1> 
-          <p className='mt-2 text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem maxime deleniti dolorem expedita rerum accusantium!</p>         
-            <div className="flex justify-between mt-4" >
-                <button className='bg-green-500 py-1 px-2 text-sm'>Accept Task</button>
-            </div>
-        </div>
-)
+    <article className="shrink-0 bg-amber-500 text-white w-[320px] rounded-2xl p-5 shadow-md">
+      <div className="flex justify-between items-center">
+        <span className="bg-white/20 text-xs px-3 py-1 rounded-full">{task.priority}</span>
+        <span className="text-xs">{task.date}</span>
+      </div>
+      <h2 className="text-xl font-bold mt-3">{task.title}</h2>
+      <p className="mt-2 text-sm text-white/90">{task.description}</p>
+      <p className="mt-3 text-xs uppercase tracking-wider">{task.category}</p>
+      <div className="flex justify-between mt-4">
+        <button
+          onClick={() => updateTaskStatus(task.id, "accepted")}
+          className="bg-white text-amber-700 text-sm font-semibold py-1.5 px-3 rounded-lg hover:bg-amber-100 transition"
+        >
+          Accept Task
+        </button>
+      </div>
+    </article>
+  )
 }
 
 export default NewTask

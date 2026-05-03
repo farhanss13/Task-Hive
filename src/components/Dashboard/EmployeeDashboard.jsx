@@ -1,15 +1,23 @@
+import { useContext } from "react"
 import Header from "../others/Header"
 import TaskListNumbers from "../others/TaskListNumbers"
 import TaskList from "../TaskList/TaskList"
-const EmployeeDashboard = ({data}) => {
+import { AuthContext } from "../../context/authContext"
+
+const EmployeeDashboard = () => {
+  const { currentUser } = useContext(AuthContext)
+  const employee = currentUser?.profile
+
+  if (!employee) {
+    return null
+  }
+
   return (
-    <div>
-      <div className="p-10 bg-[#1C1C1C] h-screen">
-    <Header data = {data}/>
-    <TaskListNumbers data = {data}/>
-    <TaskList data = {data}/>
-      </div>
-    </div>
+    <section className="min-h-screen p-4 sm:p-8 bg-slate-100 dark:bg-slate-950 transition-colors duration-300">
+      <Header />
+      <TaskListNumbers data={employee} />
+      <TaskList data={employee} />
+    </section>
   )
 }
 
